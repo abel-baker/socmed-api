@@ -11,13 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static('public'));
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || '',
+// mongoose.set('debug', true);
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/socmed-api',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
 );
-
-mongoose.set('debug', true);
 
 app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
