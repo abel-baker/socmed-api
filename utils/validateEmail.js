@@ -1,1 +1,3 @@
-module.exports = (email) => email.contains('@');
+module.exports = {
+  validateEmail: (email) => email.includes('@')
+};

@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const ReactionSchema = require('./Reaction');
-const validateEmail = require('../utils/validateEmail');
+const {validateEmail} = require('../utils/validateEmail');
 
 
 // const ReactionSchema // subdocument
@@ -25,7 +25,12 @@ const UserSchema = new Schema(
         ref: 'Thought'
       }
     ],
-    reactions: [ReactionSchema]
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
   {
     toJSON: {
@@ -36,6 +41,9 @@ const UserSchema = new Schema(
   }
 );
 
+UserSchema.virtual('friendCount').get(function() {
+  return this.friends.length;
+});
 UserSchema.virtual('thoughtCount').get(function() {
   return this.thoughts.length;
 });
