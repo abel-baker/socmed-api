@@ -1,5 +1,7 @@
 # Social media api
 
+Deployed on heroku: https://tranquil-sierra-86798.herokuapp.com
+
 ## API routes currently accessible
 
 get users: GET /api/users
