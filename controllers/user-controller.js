@@ -40,7 +40,32 @@ const userController = {
     .catch(error => {
       console.error(error);
       res.status(500).json(error);
-    })
+    });
+  },
+
+  // Friends
+  addFriend({ params }, res) {
+    User.updateOne(
+      { _id: params.id },
+      { $addToSet: { friends: params.friendId } }
+    )
+    .then(pushData => res.json(pushData))
+    .catch(error => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+  },
+
+  removeFriend({ params }, res) {
+    User.updateOne(
+      { _id: params.id },
+      { $pull: { friends: { $in: [params.friendId] } } }
+    )
+    .then(pullData => res.json(pullData))
+    .catch(error => {
+      console.error(error);
+      res.status(500).json(error);
+    });
   }
 };
 
